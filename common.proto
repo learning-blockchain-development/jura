@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package proto;
+
+option java_package = "org.jura.proto";
+option java_outer_classname = "CommonProto";
+
+message RawTransaction {
+  uint64 timestamp_ms = 1;
+  bytes signature = 2;
+
+  bytes sender = 3;
+  bytes receiver = 4;
+
+  uint64 amount = 5;
+  bytes comment = 6;
+}
+
+message TransactionList {
+  repeated RawTransaction transactions = 1;
+}
+
+message SignatureList {
+  repeated bytes signatures = 1;
+}
+
+message SignaturePair {
+  bytes account = 1;
+  bytes signature = 2;
+}
+
+message SignaturePairList {
+  repeated SignaturePair signature_pairs = 1;
+}
+
+message RawRound {
+  uint64 round_id = 1;
+  SignaturePairList signature_pair_list = 2;
+  TransactionList transaction_list = 3;
+  AddressBook next_round_address_book = 4;
+}
+
+message RoundList {
+  repeated RawRound rounds = 1;
+}
+
+message Node {
+  string address = 1;
+}
+
+message NodeList {
+  repeated Node nodes = 1;
+}
+
+message RawAddressEntry {
+  bytes account = 1;
+  string address = 2;
+}
+
+message AddressBook {
+  repeated RawAddressEntry address_entries = 1;
+}

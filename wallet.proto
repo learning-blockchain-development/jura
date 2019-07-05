@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package proto;
+
+import "common.proto";
+
+option java_package = "org.jura.proto";
+option java_outer_classname = "WalletProto";
+
+service WalletService {
+  rpc MakeTransaction (MakeTransactionRequest) returns (MakeTransactionResponse) {
+  }
+
+  rpc CheckBalance (CheckBalanceRequest) returns (CheckBalanceResponse) {
+  }
+
+  rpc GetTransactionHistory (GetTransactionHistoryRequest) returns (GetTransactionHistoryResponse) {
+  }
+}
+
+message MakeTransactionRequest {
+  RawTransaction transaction = 1;
+}
+
+message MakeTransactionResponse {
+  bool success = 1;
+}
+
+message CheckBalanceRequest {
+  bytes account = 1;
+}
+
+message CheckBalanceResponse {
+  uint64 balance = 1;
+}
+
+message GetTransactionHistoryRequest {
+  bytes account = 1;
+}
+
+message GetTransactionHistoryResponse {
+  TransactionList transaction_list = 1;
+}
+
